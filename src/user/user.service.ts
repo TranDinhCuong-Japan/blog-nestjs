@@ -44,12 +44,20 @@ export class UserService{
      * Xử lý sửa nội dung user
     */
     async update(id: number, userUpdateDto: UserUpdateDto):Promise<UpdateResult>{
-        return await this.repository.update(id, userUpdateDto);
+        const updateUser =  await this.repository.update(id, userUpdateDto);
+        if(updateUser.affected !== 1){
+            throw new HttpException('User not exits', HttpStatus.BAD_REQUEST);
+        }
+        return updateUser;
     }
     /**
      * Xử lý xóa user
     */
     async delete(id: number):Promise<DeleteResult>{
-        return await this.repository.delete(id);
+        const deleteUser = await this.repository.delete(id);
+        if(deleteUser.affected !== 1){
+            throw new HttpException('User not exits', HttpStatus.BAD_REQUEST);
+        }
+        return deleteUser;
     }
 }
