@@ -6,13 +6,15 @@ import { typeormConfig } from 'db/typeorm.config';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [ 
     TypeOrmModule.forRoot(typeormConfig), 
     AuthModule,
     ConfigModule.forRoot(),
-    UserModule
+    UserModule,
+    PostModule
   ],
   controllers: [AppController],
   providers: [AppService],
