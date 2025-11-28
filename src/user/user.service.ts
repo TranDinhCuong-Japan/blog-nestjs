@@ -19,7 +19,7 @@ export class UserService{
         const item_per_page = Number(query.item_per_page) || 10;
         const page = Number(query.page) || 1;
         const skip = (page - 1) * item_per_page;
-        const search = query.search;
+        const search = query.search || '';
         const[res, total] = await this.repository.findAndCount({
             where: [
                 {firstName: Like('%' + search +'%')},
